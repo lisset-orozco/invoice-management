@@ -19,6 +19,6 @@ Rails.application.routes.draw do
   get '/health_check', to: proc { [200, {}, ['success']] }
 
   namespace :v1 do
-    resources :users
+    resources :users, only: :create
   end
 end
