@@ -3,18 +3,29 @@
 require 'rails_helper'
 
 RSpec.describe(User, type: :model) do
-  describe '#create' do
-    subject(:user) { create(:user) }
+  subject(:user) { build(:user) }
 
-    it 'exists in the database' do
-      expect(user).to be_a_kind_of(described_class)
-      expect(described_class.count).to eq(1)
+  describe 'object' do
+    it 'is valid' do
+      expect(user).to be_valid
+    end
 
-      expect(user.name).to eq('Paco')
-      expect(user.last_name).to eq('Garcia')
-      expect(user.username).to eq('Pako')
-      expect(user.age).to eq(40)
-      expect(user.id).to eq(1)
+    it 'is not valid without email' do
+      user.email = nil
+      expect(user).not_to be_valid
+    end
+  end
+
+  describe 'validations' do
+    context 'when present' do
+      it { is_expected.to validate_presence_of(:email) }
+      it { is_expected.to validate_presence_of(:password) }
+      it { is_expected.to validate_presence_of(:rfc) }
+    end
+
+    context 'when unique' do
+      it { is_expected.to validate_uniqueness_of(:email) }
+      it { is_expected.to validate_uniqueness_of(:rfc) }
     end
   end
 end

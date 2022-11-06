@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  validates :name, :last_name, :username, :age, presence: true
-  validates :age, comparison: { greater_than: 18 }
+  has_secure_password
+
+  validates :rfc, :email, :password, presence: true
+  validates :rfc, uniqueness: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
 end
