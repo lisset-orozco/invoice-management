@@ -24,7 +24,7 @@ gem 'redis', '~> 4.6'
 # gem 'kredis'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.18'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -46,6 +46,16 @@ gem 'rswag-api', '~> 2.5', '>= 2.5.1'
 gem 'rswag-ui', '~> 2.5', '>= 2.5.1'
 # Simple, efficient background processing for Ruby
 gem 'sidekiq', '~> 6.4', '>= 6.4.1'
+# Pagination
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
+# rubyzip is a ruby module for reading and writing zip files
+gem 'rubyzip', '~> 2.3', '>= 2.3.2'
+# A library for bulk inserting data using ActiveRecord.
+gem 'activerecord-import', '~> 1.4', '>= 1.4.1'
+# A library for creating and rendering QR codes into various formats
+gem 'rqrcode', '~> 2.1', '>= 2.1.2'
+# A pure ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard.
+gem 'jwt', '~> 2.5'
 
 group :development, :test do
   # Great Ruby debugging companion: pretty print Ruby objects to visualize their structure.
