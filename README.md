@@ -1,6 +1,11 @@
-[![Continuous Integration](https://github.com/lisset-orozco/ruby-on-rails-api-template/actions/workflows/build_with_tests_and_linters.yml/badge.svg)](https://github.com/lisset-orozco/ruby-on-rails-api-template/actions/workflows/build_with_tests_and_linters.yml)
+[![Continuous Integration](https://github.com/lisset-orozco/invoice-management/actions/workflows/build_with_tests_and_linters.yml/badge.svg)](https://github.com/lisset-orozco/invoice-management/actions/workflows/build_with_tests_and_linters.yml)
 
-# Ruby on Rails on Docker with CI/CD
+## Backend Challenge
+
+* Heroku: https://invoice-management-k.herokuapp.com/health_check
+* Postman collection: 
+
+## Ruby on Rails on Docker with CI/CD
 
 ## Quick start
 
@@ -39,7 +44,7 @@ docker compose up
 
 > go to link `localhost:3000/health_check`
 
-### Services
+### Services
 
 * postgresql: `14.2-alpine`
 * redis: `7.0-rc-alpine`
@@ -56,6 +61,10 @@ secrets.HEROKU_API_EMAIL
 ```
 
 - create an app on Heroku
+
+```shell
+heroku login
+```
 
 ```shell
 heroku create --region us <APP-NAME>
