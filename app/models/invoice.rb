@@ -9,4 +9,6 @@ class Invoice < ApplicationRecord
   enum status: { active: 'active', inactive: 'inactive', pending: 'pending' }
 
   belongs_to :user
+
+  scope :with_emitted_at, ->(date) { where(emitted_at: Time.zone.parse(date).all_day) if date.present? }
 end
