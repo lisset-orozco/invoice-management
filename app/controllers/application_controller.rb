@@ -21,11 +21,8 @@ class ApplicationController < ActionController::API
   end
 
   def paginate(collection, total_amount = nil)
-    filter = {
-      pages: collection.total_pages,
-      page_number: collection.current_page,
-      page_size: collection.size
-    }
+    filter = { pages: collection.total_pages, page_number: collection.current_page, page_size: collection.size }
+
     filter[:total_amount] = collection.pluck(:amount).sum if total_amount
     filter[:invoices] = collection
     filter

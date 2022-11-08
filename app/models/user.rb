@@ -7,5 +7,5 @@ class User < ApplicationRecord
   validates :rfc, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
 
-  has_many :invoices
+  has_many :invoices, dependent: :destroy
 end

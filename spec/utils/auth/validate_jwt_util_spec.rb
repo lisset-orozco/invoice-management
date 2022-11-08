@@ -4,8 +4,16 @@ require 'rails_helper'
 
 RSpec.describe(Auth::ValidateJwtUtil, type: :util) do
   let(:util) { described_class }
-  let(:token) { 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHBpcmVzX2luIjozMzM1Njg0NjM5fQ.FYk_JeiFRr9fkB_oyHWJioxPBulHwPt2flseYIfahgc' }
-  let(:expired_token) { 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHBpcmVzX2luIjoxNjY3NzE1MTkxfQ.GExyiCHdvB5aR6xaayGS8OWSkHotfgkPeJTYRWv6lqY' }
+  let(:token) do
+    'eyJhbGciOiJIUzI1NiJ9' \
+      '.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHBpcmVzX2luIjozMzM1Njg0NjM5fQ' \
+      '.FYk_JeiFRr9fkB_oyHWJioxPBulHwPt2flseYIfahgc'
+  end
+  let(:expired_token) do
+    'eyJhbGciOiJIUzI1NiJ9' \
+      '.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHBpcmVzX2luIjoxNjY3NzE1MTkxfQ' \
+      '.GExyiCHdvB5aR6xaayGS8OWSkHotfgkPeJTYRWv6lqY'
+  end
 
   describe '#call' do
     before do
@@ -18,7 +26,7 @@ RSpec.describe(Auth::ValidateJwtUtil, type: :util) do
 
         expect(result).to have_attributes(
           success?: true,
-          payload: { 'email' => 'test@test.com', 'expires_in' => 3335684639, 'user_id' => 1 },
+          payload: { 'email' => 'test@test.com', 'expires_in' => a_kind_of(Integer), 'user_id' => 1 },
           error: nil
         )
       end
