@@ -43,6 +43,10 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
 
+Style/StringHashKeys:
+  Exclude:
+    - 'spec/**/*.rb'
+
 Style/Copyright:
   Enabled: false
 
