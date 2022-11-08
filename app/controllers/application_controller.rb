@@ -20,12 +20,14 @@ class ApplicationController < ActionController::API
     render(status: :unauthorized)
   end
 
-  def paginate(collection)
-    {
+  def paginate(collection, total_amount = nil)
+    filter = {
       pages: collection.total_pages,
       page_number: collection.current_page,
-      page_size: collection.size,
-      invoices: collection
+      page_size: collection.size
     }
+    filter[:total_amount] = collection.pluck(:amount).sum if total_amount
+    filter[:invoices] = collection
+    filter
   end
 end
