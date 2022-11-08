@@ -20,7 +20,7 @@ module V1
     end
 
     def index
-      response = Invoices::SearchQuery.call(search_params)
+      response = Invoices::SearchService.call(search_params)
 
       if response.success?
         render(json: { data: paginate(response.payload) })
