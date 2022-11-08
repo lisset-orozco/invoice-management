@@ -3,6 +3,10 @@
 class ApplicationController < ActionController::API
   before_action :authenticate
 
+  rescue_from Exception do |exception|
+    render json: { error: exception }, status: :unprocessable_entity
+  end
+
   def authenticate
     return render_unauthorized if request.headers['Authorization'].blank?
 
@@ -16,7 +20,12 @@ class ApplicationController < ActionController::API
     render(status: :unauthorized)
   end
 
-  rescue_from Exception do |exception|
-    render json: { error: exception }, status: :unprocessable_entity
+  def paginate(collection)
+    {
+      pages: collection.total_pages,
+      page_number: collection.current_page,
+      page_size: collection.size,
+      invoices: collection
+    }
   end
 end

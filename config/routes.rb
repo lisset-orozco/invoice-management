@@ -26,5 +26,6 @@ Rails.application.routes.draw do
     post '/invoices', to: 'invoices#create'
     put '/invoices/:invoice_uuid', to: 'invoices#update'
     delete '/invoices/:invoice_uuid', to: 'invoices#destroy'
+    get '/invoices', to: 'invoices#index'
   end
 end

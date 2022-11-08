@@ -17,6 +17,16 @@ module V1
       default_response(response, :ok)
     end
 
+    def index
+      response = Invoices::SearchQuery.call(search_params)
+
+      if response.success?
+        render(json: { data: paginate(response.payload) })
+      else
+        render(json: { error: response.error }, status: :unprocessable_entity)
+      end
+    end
+
     private
 
     def default_response(response, status)
@@ -39,6 +49,21 @@ module V1
         emitter: %i[name rfc],
         receiver: %i[name rfc],
         amount: %i[cents currency]
+      )
+    end
+
+    def search_params
+      params.permit(
+        :user_id,
+        :status,
+        :emitter_name,
+        :emitter_rfc,
+        :receiver_name,
+        :receiver_rfc,
+        :min_amount,
+        :max_amount,
+        :page_number,
+        :page_size
       )
     end
   end
