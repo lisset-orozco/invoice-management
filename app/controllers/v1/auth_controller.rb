@@ -2,6 +2,8 @@
 
 module V1
   class AuthController < ApplicationController
+    skip_before_action :authenticate, only: :login
+
     def login
       response = Auth::UserLoginService.call(user_params)
 
