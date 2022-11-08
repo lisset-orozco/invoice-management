@@ -22,5 +22,7 @@ Rails.application.routes.draw do
     resources :users, only: :create
 
     post '/login', to: 'auth#login'
+
+    post '/invoices', to: 'invoices#create'
   end
 end
