@@ -91,6 +91,8 @@ group :development, :test do
 end
 
 group :development do
+  # Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis.
+  gem 'brakeman', '~> 5.3', '>= 5.3.1'
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem 'spring'
 end
