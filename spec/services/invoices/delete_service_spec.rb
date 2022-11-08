@@ -9,13 +9,30 @@ RSpec.describe(Invoices::DeleteService, type: :service) do
 
   describe '#call' do
     context 'when success' do
-      it 'updated invoice with status inactive' do
-        result = service.call(invoice_params)
+      let(:run_at) { Time.parse('2022-11-08 13:00:00 -0600').in_time_zone('Mexico City') }
 
-        expect(result.success?).to be(true)
-        expect(result.payload.id).to eq(invoice.id)
-        expect(result.payload.status).to eq('inactive')
-        expect(result.payload.deleted_at).not_to be_nil
+      around do |example|
+        travel_to(run_at)
+        example.run
+        travel_back
+      end
+
+      it 'updated invoice with status inactive' do
+        result =
+          expect do
+            service.call(invoice_params)
+            invoice.reload
+          end
+        result.to change(invoice, :status).from('active').to('inactive')
+      end
+
+      it 'updated invoice deleted_at from nil to date' do
+        result =
+          expect do
+            service.call(invoice_params)
+            invoice.reload
+          end
+        result.to change(invoice, :deleted_at).from(nil).to(run_at)
       end
 
       it 'returns an updated object invoice' do

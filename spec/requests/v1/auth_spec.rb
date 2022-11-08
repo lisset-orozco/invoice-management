@@ -26,7 +26,7 @@ RSpec.describe('v1/auth', type: :request) do
       it 'renders an error due to missing params' do
         request(:post, '/v1/login', {})
 
-        commom_error_response('Missing paramss')
+        commom_error_response('Missing params')
       end
 
       it 'renders an error due to invalid password' do
