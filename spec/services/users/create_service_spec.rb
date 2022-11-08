@@ -33,12 +33,7 @@ RSpec.describe(Users::CreateService, type: :service) do
 
         expect(result.success?).to be(false)
         expect(result.error[:source]).to eq('Users::CreateService')
-        expect(result.error[:message]).to include(
-          "Validation failed: Password can't be blank, " \
-          "Rfc can't be blank, " \
-          "Email can't be blank, " \
-          "Password can't be blank, Email is invalid"
-        )
+        expect(result.error[:message]).to include('Validation failed')
       end
     end
   end

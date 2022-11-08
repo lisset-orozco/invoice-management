@@ -28,4 +28,8 @@ RSpec.describe(User, type: :model) do
       it { is_expected.to validate_uniqueness_of(:rfc) }
     end
   end
+
+  describe 'relations' do
+    it { is_expected.to have_many(:invoices) }
+  end
 end
