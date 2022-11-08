@@ -27,6 +27,12 @@ module V1
       end
     end
 
+    def import_zip_file
+      Invoices::ImportZipFileJob.perform_later(file_path: params[:file_path].path, user_id: params[:user_id])
+
+      render(json: { message: 'Processing invoices' })
+    end
+
     private
 
     def default_response(response, status)
