@@ -24,5 +24,6 @@ Rails.application.routes.draw do
     post '/login', to: 'auth#login'
 
     post '/invoices', to: 'invoices#create'
+    put '/invoices/:invoice_uuid', to: 'invoices#update'
   end
 end

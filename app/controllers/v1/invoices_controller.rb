@@ -4,15 +4,23 @@ module V1
   class InvoicesController < ApplicationController
     def create
       response = Invoices::CreateService.call(invoice_params)
+      default_response(response, :created)
+    end
 
+    def update
+      response = Invoices::UpdateService.call(invoice_params)
+      default_response(response, :ok)
+    end
+
+    private
+
+    def default_response(response, status)
       if response.success?
-        render(json: { data: response.payload }, status: :created)
+        render(json: { data: response.payload }, status:)
       else
         render(json: { error: response.error }, status: :unprocessable_entity)
       end
     end
-
-    private
 
     def invoice_params
       params.permit(

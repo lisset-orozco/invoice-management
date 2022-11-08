@@ -30,4 +30,37 @@ RSpec.describe('v1/invoices', type: :request) do
       end
     end
   end
+
+  describe 'PUT /update' do
+    let(:invoice) { create(:invoice, user_id: user.id) }
+    let(:endpoint) { "/v1/invoices/#{invoice.invoice_uuid}" }
+    let(:params) { invoice_params.merge(user_id: invoice.user_id, invoice_uuid: invoice.invoice_uuid) }
+
+    context 'with valid parameters' do
+      it 'update an invoice' do
+        request_auth(:put, endpoint, token_params, invoice_params)
+
+        expect(response).to have_http_status(:ok)
+
+        expect(json_body['data']['invoice_uuid']).to eq(invoice.invoice_uuid)
+        expect(json_body['data']['user_id']).to eq(invoice.user_id)
+        expect(json_body['data']['created_at']).not_to eq(json_body['data']['updated_at'])
+      end
+
+      it 'renders a JSON response with the new invoice' do
+        request_auth(:put, endpoint, token_params, invoice_params)
+
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to match(a_string_including('application/json'))
+      end
+    end
+
+    context 'when missing token auth in headers' do
+      it 'returns unauthorized' do
+        request_auth(:put, endpoint, {}, invoice_params)
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
 end
