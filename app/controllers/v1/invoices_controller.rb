@@ -2,6 +2,8 @@
 
 module V1
   class InvoicesController < ApplicationController
+    include ActionController::MimeResponds
+
     def create
       response = Invoices::CreateService.call(invoice_params)
       default_response(response, :created)
@@ -31,6 +33,17 @@ module V1
       Invoices::ImportZipFileJob.perform_later(file_path: params[:file_path].path, user_id: params[:user_id])
 
       render(json: { message: 'Processing invoices' })
+    end
+
+    def qr_code
+      invoice = Invoices::SearchService.call(**qr_code_params).payload
+      response = QrCodeUtil.call(str_qr: invoice.first.cfdi_digital_stamp)
+
+      if response.success?
+        send_data(response.payload.to_s, type: 'image/png', disposition: 'inline')
+      else
+        render(json: { error: response.error }, status: :unprocessable_entity)
+      end
     end
 
     private
@@ -71,6 +84,10 @@ module V1
         :page_number,
         :page_size
       )
+    end
+
+    def qr_code_params
+      params.permit(:user_id, :invoice_uuid)
     end
   end
 end

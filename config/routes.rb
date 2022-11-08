@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     delete '/invoices/:invoice_uuid', to: 'invoices#destroy'
     get '/invoices', to: 'invoices#index'
     post '/invoices/import_zip_file', to: 'invoices#import_zip_file'
+    get '/invoices/qr_code/:invoice_uuid', to: 'invoices#qr_code'
 
     get '/provider_invoices', to: 'provider_invoices#index'
   end
