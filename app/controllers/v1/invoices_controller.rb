@@ -12,6 +12,11 @@ module V1
       default_response(response, :ok)
     end
 
+    def destroy
+      response = Invoices::DeleteService.call(invoice_params)
+      default_response(response, :ok)
+    end
+
     private
 
     def default_response(response, status)
