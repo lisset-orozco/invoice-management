@@ -3,7 +3,7 @@
 ## Backend Challenge
 
 * Heroku: https://invoice-management-k.herokuapp.com/health_check
-* Postman collection: 
+* Postman collection: /miscellaneous/files/invoice-management-endpoints.postman_collection.json
 
 ## Ruby on Rails on Docker with CI/CD
 

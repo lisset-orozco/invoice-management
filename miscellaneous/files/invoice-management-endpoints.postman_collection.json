@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "fa3905b8-cfaf-4863-b758-2fc511161aff",
+		"name": "invoice-management-endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test1@gmail.com\",\n    \"password\": \"1234567\",\n    \"rfc\": \"QDM830310A77\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{heroku-url}}/v1/users",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create invoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InRlc3QwQGdtYWlsLmNvbSIsImV4cGlyZXNfaW4iOjMzMzU5NTk3NDV9.QZrYK24DphlI0_WW_SBsouUVrD3T_IKV19QYa3896Uc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"invoice_uuid\": \"5703cib4-test0-4309-81a9-28a7d4f67kq\",\n   \"status\": \"active\",\n   \"emitter\": { \"name\": \"test\", \"rfc\": \"TTD84120945Y\" },\n   \"receiver\": { \"name\": \"joa\", \"rfc\": \"TST830310A16\"},\n   \"amount\": { \"cents\": 39061, \"currency\": \"PLN\" },\n   \"emitted_at\": \"Sun, 29 Mar 2020\",\n   \"expires_at\": \"Thu, 11 Apr 2019\",\n   \"signed_at\": \"Thu, 29 Nov 2018\",\n   \"cfdi_digital_stamp\": \n    \"grrbkqhlst82wv56mxdldi0ucxute9a874lajdez8eotjybioufgkypwd64lxir06n1cd9ax0r2qcvy471mbl3qh2v7dy6m0ofudzlie7phq2ysvck2mwzuiuguxgy1iauurvho9zsloi28c02tukhp9y095l7vmilnqssljhqizx3mhlr0asemy7dpmzysq8c7v355k59y125uirnsidho4skexfm0tanpkfns8uw4fzrktafa0p7i8y3b6kmt\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{heroku-url}}/v1/invoices",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Invoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Imxpc3M2QGdtYWlsLmNvbSIsImV4cGlyZXNfaW4iOjMzMzU4MjM2MzF9.Jmnftdhi8wgx1VwdL90u7cC6RAWcQD7nzanjQi1msKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 3333,\n   \"status\": \"active\",\n   \"emitter\": { \"name\": \"Jpfa\", \"rfc\": \"MuD84120945Y\" },\n   \"receiver\": { \"name\": \"Hgo Abrín Salas\", \"rfc\": \"QuM830310AQG\"},\n   \"amount\": { \"cents\": 569861, \"currency\": \"PLN\" },\n   \"emitted_at\": \"Sun, 29 Mar 2020\",\n   \"expires_at\": \"Thu, 11 Apr 2019\",\n   \"signed_at\": \"Thu, 29 Nov 2018\",\n   \"cfdi_digital_stamp\": \n    \"grrbkqhlst82wv56mxdldi0ucxute9a874lajdez8eotjybioufgkypwd64lxir06n1cd9ax0r2qcvy471mbl3qh2v7dy6m0ofudzlie7phq2ysvck2mwzuiuguxgy1iauurvho9zsloi28c02tukhp9y095l7vmilnqssljhqizx3mhlr0asemy7dpmzysq8c7v355k59y125uirnsidho4skexfm0tanpkfns8uw4fzrktafa0p7i8y3b6kmt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{heroku-url}}/v1/invoices/3b03c0b2-aa3f-4309-81a9-28a7d4f67kq",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"invoices",
+						"3b03c0b2-aa3f-4309-81a9-28a7d4f67kq"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Invoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Imxpc3M2QGdtYWlsLmNvbSIsImV4cGlyZXNfaW4iOjMzMzU4MjM2MzF9.Jmnftdhi8wgx1VwdL90u7cC6RAWcQD7nzanjQi1msKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{heroku-url}}/v1/invoices/3b03c0b2-aa3f-4309-81a9-28a7d4f67kq",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"invoices",
+						"3b03c0b2-aa3f-4309-81a9-28a7d4f67kq"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index Invoices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Imxpc3MxQGdtYWlsLmNvbSIsImV4cGlyZXNfaW4iOjMzMzU1MTI3OTV9.JbcByHzw62mIRMSpf0xtoaAJKkSyq9HDENqwvc-PDrI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "au",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{heroku-url}}/v1/invoices",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"invoices"
+					],
+					"query": [
+						{
+							"key": "emitter_rfc",
+							"value": "ÑZD84120945Y",
+							"disabled": true
+						},
+						{
+							"key": "emitter_name",
+							"value": "Rocío X Barajas",
+							"disabled": true
+						},
+						{
+							"key": "receiver_name",
+							"value": "QDM830310AQG",
+							"disabled": true
+						},
+						{
+							"key": "receiver_rfc",
+							"value": "QDM830310A16",
+							"disabled": true
+						},
+						{
+							"key": "min_amount",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "max_amount",
+							"value": "500000",
+							"disabled": true
+						},
+						{
+							"key": "page_number",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "page_size",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invoices from emitters",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Imxpc3M2QGdtYWlsLmNvbSIsImV4cGlyZXNfaW4iOjMzMzU4MjM2MzF9.Jmnftdhi8wgx1VwdL90u7cC6RAWcQD7nzanjQi1msKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{heroku-url}}/v1/provider_invoices",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"provider_invoices"
+					],
+					"query": [
+						{
+							"key": "page_size",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "page_number",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "emitted_at",
+							"value": "2022-11-07",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import Zip Invoices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imxpc3M3QGdtYWlsLmNvbSIsImV4cGlyZXNfaW4iOjMzMzU4NjM1ODV9.i-ZRPGVSX_YVjq2IIS6wVPDvjv6WMIArI0b-E7a9ahs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file_path",
+							"type": "file",
+							"src": "/Users/lisset/Code Challenges/Kredi/20220811012132-invoices.zip"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{heroku-url}}/v1/invoices/import_zip_file",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"invoices",
+						"import_zip_file"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get qr code image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imxpc3M3QGdtYWlsLmNvbSIsImV4cGlyZXNfaW4iOjMzMzU4NjM1ODV9.i-ZRPGVSX_YVjq2IIS6wVPDvjv6WMIArI0b-E7a9ahs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{heroku-url}}/v1/invoices/qr_code/4b03c0b2-aa3f-4309-81a9-28a7d4f67ce9",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"invoices",
+						"qr_code",
+						"4b03c0b2-aa3f-4309-81a9-28a7d4f67ce9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test1@gmail.com\",\n    \"password\": \"1234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{heroku-url}}/v1/login",
+					"host": [
+						"{{heroku-url}}"
+					],
+					"path": [
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
